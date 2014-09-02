@@ -1,0 +1,22 @@
+---
+driver_plugin: vagrant
+driver_config:
+  require_chef_omnibus: true
+
+platforms:
+  - name: ubuntu-12.04
+    driver_config:
+      box: opscode-ubuntu-12.04
+      box_url: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+
+suites:
+  - name: 'default'
+    run_list:
+      - recipe[ndenv]
+      - recipe[ndenv::install]
+    attributes:
+      ndenv:
+        installs:
+          - v0.10.20
+          - v0.10.26
+        global: v0.10.20

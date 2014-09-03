@@ -15,5 +15,3 @@ default['ndenv']['group_users'] = []
 default['ndenv']['manage_home'] = true
 default['ndenv']['root_path'] = "#{node['ndenv']['user_home']}/.ndenv"
 default['ndenv']['profile_path'] = '/etc/profile.d'
-default['ndenv']['installs'] = ['v0.10.26']
-default['ndenv']['global'] = 'v0.10.26'

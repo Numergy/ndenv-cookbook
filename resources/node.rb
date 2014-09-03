@@ -8,10 +8,10 @@
 
 actions :install
 
-attribute :name,         :kind_of => String
-attribute :node_version, :kind_of => String
-attribute :force,        :default => false
-attribute :global,       :default => false
+attribute :name,         kind_of: String
+attribute :node_version, kind_of: String
+attribute :force,        default: false
+attribute :global,       default: false
 
 def initialize(*args)
   super

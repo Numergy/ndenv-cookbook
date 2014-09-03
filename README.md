@@ -1,23 +1,20 @@
 ndenv Cookbook
 ==============
-TODO: Enter the cookbook description here.
-
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+This cookbook installs and configures [ndenv](https://github.com/riywo/ndenv) for a specific user.
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
+#### cookbooks
+- `apt` - https://supermarket.getchef.com/cookbooks/apt
+- `build-essential` - https://supermarket.getchef.com/cookbooks/build-essential
+- `git` - https://supermarket.getchef.com/cookbooks/git
 
-e.g.
-#### packages
-- `toaster` - ndenv needs toaster to brown your bagel.
+#### platforms
+The following platforms and versions are tested and supported using Opscode's test-kitchen.
+- `Ubuntu 12.04`
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
-
-e.g.
 #### ndenv::default
 <table>
 <tr>
@@ -27,19 +24,69 @@ e.g.
 <th>Default</th>
 </tr>
 <tr>
-<td><tt>['ndenv']['bacon']</tt></td>
+<td><tt>['ndenv']['user']</tt></td>
+<td>String</td>
+<td>User to use for ndenv install, create if not exists.</td>
+<td><tt>ndenv</tt></td>
+</tr>
+<tr>
+<td><tt>['ndenv']['user_home']</tt></td>
+<td>String</td>
+<td>User home</td>
+<td><tt>/home/ndenv</tt></td>
+</tr>
+<tr>
+<td><tt>['ndenv']['group']</tt></td>
+<td>String</td>
+<td>Group to use for ndenv install, create if not exists.</td>
+<td><tt>ndenv</tt></td>
+</tr>
+<tr>
+<td><tt>['ndenv']['group_users']</tt></td>
+<td>Array</td>
+<td>List of users to add to specified group.</td>
+<td><tt>[]</tt></td>
+</tr>
+<tr>
+<td><tt>['ndenv']['manage_home']</tt></td>
 <td>Boolean</td>
-<td>whether to include bacon</td>
+<td>Manage user home. Used for `user` resource.</td>
 <td><tt>true</tt></td>
+</tr>
+<tr>
+<td><tt>['ndenv']['root_path']</tt></td>
+<td>String</td>
+<td>Ndenv root path.</td>
+<td><tt>/home/ndenv/.ndenv</tt></td>
+</tr>
+<tr>
+<td><tt>['ndenv']['profile_path']</tt></td>
+<td>String</td>
+<td>Profile.d path where will be stored ndenv init script.</td>
+<td><tt>/etc/profile.d</tt></td>
+</tr>
+</table>
+
+#### ndenv::install
+<table>
+<tr>
+<td><tt>['ndenv']['installs']</tt></td>
+<td>Array</td>
+<td>List of node.js versions to install.</td>
+<td><tt>['v0.10.26']</tt></td>
+</tr>
+<tr>
+<td><tt>['ndenv']['global']</tt></td>
+<td>String</td>
+<td>Node.js version to set as global.</td>
+<td><tt>0.10.26</tt></td>
 </tr>
 </table>
 
 Usage
 -----
 #### ndenv::default
-TODO: Write usage instructions for each cookbook.
-
-e.g.
+This recipe install and configure ndenv for specified user/group.
 Just include `ndenv` in your node's `run_list`:
 
 ```json
@@ -51,11 +98,58 @@ Just include `ndenv` in your node's `run_list`:
 }
 ```
 
+#### ndenv::install
+This recipe install specified node.js versions. Ndenv must be installed to use this recipe!
+Set `installs` and `global` attributes and include `ndenv::install` in your node's `run_list`:
+
+```json
+{
+"name":"my_node",
+  "run_list": [
+    "recipe[ndenv]"
+    "recipe[ndenv::install]"
+  ],
+  "attributes": [
+    "ndenv": [
+      "installs": ["0.10.20", "0.10.26"],
+      "global": "0.10.26"
+    ]
+  ]
+}
+```
+
+Resources/Providers
+-------------------
+#### ndenv_node
+Install specified version of Node.js to be managed by ndenv.
+
+##### Actions
+Action  | Description                   | Default
+------- |-------------                  |---------
+install | Install the version of Nodejs | Yes
+
+##### Attributes
+Attribute    | Description                                                 | Default
+-------      |-------------                                                |---------
+node_version | the node version you wish to install                        | name
+force        | install even if this version is already present (reinstall) | false
+global       | set this node.js version as the global version              | false
+
+Examples
+--------
+##### Installing Node.js 0.10.20
+
+    ndenv_node "v0.10.20"
+
+##### Forcefully install Node.js 0.10.20
+
+    ndenv_node "Node.js 0.10.20" do
+      node_version "0.10.20"
+      force true
+    end
+
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
 3. Write your change
@@ -65,4 +159,8 @@ e.g.
 
 License and Authors
 -------------------
-Authors: TODO: List authors
+|                      |                                             |
+|:---------------------|:--------------------------------------------|
+| **Author**           | Antoine Rouyer <antoine.rouyer@numergy.com> |
+|                      |                                             |
+| **Copyright**        | Copyright (c) 2014 Numergy                  |

@@ -10,21 +10,22 @@ require 'chef/mixin/shell_out'
 
 class Chef
   module Mixin
+    # Chef::Mixin::Ndenv module to manage ndenv commands
     module Ndenv
       include Chef::Mixin::ShellOut
 
       def ndenv_command(cmd, options = {})
         unless ndenv_installed?
-          raise 'ndenv is not installed, can\'t run ndenv_command.'
+          fail 'ndenv is not installed, can\'t run ndenv_command.'
         end
 
         default_options = {
-          :user => node['ndenv']['user'],
-          :group => node['ndenv']['group'],
-          :cwd => node['ndenv']['user_home'],
-          :env => { 'NDENV_ROOT' => node['ndenv']['root_path'] },
-          :timeout => 3600
-        }
+          user: node['ndenv']['user'],
+          group: node['ndenv']['group'],
+          cwd: node['ndenv']['user_home'],
+          env: { 'NDENV_ROOT' => node['ndenv']['root_path'] },
+          timeout: 3600 }
+
         shell_out("#{node['ndenv']['root_path']}/bin/ndenv #{cmd}", Chef::Mixin::DeepMerge.deep_merge!(options, default_options))
       end
 

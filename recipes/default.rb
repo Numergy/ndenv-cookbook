@@ -40,15 +40,16 @@ end
 directory node['ndenv']['root_path'] do
   owner node['ndenv']['user']
   group node['ndenv']['group']
-  mode '2775'
+  mode '0755'
   recursive true
 end
 
 git node['ndenv']['root_path'] do
+  not_if { File.exist?("#{node['ndenv']['root_path']}/.git") }
   user node['ndenv']['user']
   group node['ndenv']['group']
-  repository 'git://github.com/riywo/ndenv.git'
-  reference 'master'
+  repository node['ndenv']['git_repository']
+  reference node['ndenv']['git_reference']
   action :sync
 end
 
@@ -65,8 +66,8 @@ git "#{node['ndenv']['root_path']}/plugins/node-build" do
   not_if { File.exist?("#{node['ndenv']['root_path']}/plugins/node-build") }
   user node['ndenv']['user']
   group node['ndenv']['group']
-  repository 'git://github.com/riywo/node-build.git'
-  reference 'master'
+  repository node['node_build']['git_repository']
+  reference node['node_build']['git_reference']
   action :sync
 end
 

@@ -65,6 +65,30 @@ Attributes
 <td>Profile.d path where will be stored ndenv init script.</td>
 <td><tt>/etc/profile.d</tt></td>
 </tr>
+<tr>
+<td><tt>['ndenv']['git_repository']</tt></td>
+<td>String</td>
+<td>Git repository for ndenv.</td>
+<td><tt>https://github.com/riywo/ndenv.git</tt></td>
+</tr>
+<tr>
+<td><tt>['ndenv']['git_reference]</tt></td>
+<td>String</td>
+<td>Git reference for ndenv.</td>
+<td><tt>master</tt></td>
+</tr>
+<tr>
+<td><tt>['node_build']['git_repository']</tt></td>
+<td>String</td>
+<td>Git repository for node-build.</td>
+<td><tt>https://github.com/riywo/node-build.git</tt></td>
+</tr>
+<tr>
+<td><tt>['node_build']['git_reference]</tt></td>
+<td>String</td>
+<td>Git reference for node-build.</td>
+<td><tt>master</tt></td>
+</tr>
 </table>
 
 #### ndenv::install

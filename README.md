@@ -1,6 +1,6 @@
-ndenv Cookbook
+ndenv Cookbook [![Build Status](https://travis-ci.org/Numergy/ndenv-cookbook.svg)](https://travis-ci.org/Numergy/ndenv-cookbook)
 ==============
-This cookbook installs and configures [ndenv](https://github.com/riywo/ndenv) for a specific user.
+This cookbook installs and configures [ndenv](https://github.com/riywo/ndenv).
 
 Requirements
 ------------

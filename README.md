@@ -57,7 +57,7 @@ Attributes
 <td><tt>['ndenv']['root_path']</tt></td>
 <td>String</td>
 <td>Ndenv root path.</td>
-<td><tt>/home/ndenv/.ndenv</tt></td>
+<td><tt>/opt/ndenv</tt></td>
 </tr>
 <tr>
 <td><tt>['ndenv']['profile_path']</tt></td>

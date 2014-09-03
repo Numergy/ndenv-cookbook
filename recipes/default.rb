@@ -25,8 +25,14 @@ user node['ndenv']['user'] do
   home node['ndenv']['user_home']
 end
 
+directory node['ndenv']['root_path'] do
+  owner node['ndenv']['user']
+  group node['ndenv']['group']
+  mode '2775'
+  recursive true
+end
+
 git node['ndenv']['root_path'] do
-  not_if { File.exist?(node['ndenv']['root_path']) }
   user node['ndenv']['user']
   group node['ndenv']['group']
   repository 'git://github.com/riywo/ndenv.git'

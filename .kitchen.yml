@@ -16,6 +16,7 @@ suites:
       - recipe[ndenv::install]
     attributes:
       ndenv:
+        group_users: [ vagrant ]
         installs:
           - v0.10.20
           - v0.10.26

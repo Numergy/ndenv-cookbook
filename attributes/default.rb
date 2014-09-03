@@ -13,5 +13,5 @@ default['ndenv']['user_home'] = "/home/#{node['ndenv']['user']}"
 default['ndenv']['group'] = 'ndenv'
 default['ndenv']['group_users'] = []
 default['ndenv']['manage_home'] = true
-default['ndenv']['root_path'] = "#{node['ndenv']['user_home']}/.ndenv"
+default['ndenv']['root_path'] = "/opt/ndenv"
 default['ndenv']['profile_path'] = '/etc/profile.d'

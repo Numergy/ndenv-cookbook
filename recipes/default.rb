@@ -73,8 +73,8 @@ end
 
 directory node['ndenv']['profile_path'] do
   not_if { File.exist?(node['ndenv']['profile_path']) }
-  owner node['ndenv']['user']
-  group node['ndenv']['group']
+  owner 'root'
+  group 'root'
   mode '0755'
   recursive true
   action :create

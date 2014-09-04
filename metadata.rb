@@ -6,6 +6,13 @@ description 'Installs/Configures ndenv'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version '0.1.0'
 
-depends 'apt'
-depends 'build-essential'
-depends 'git'
+recipe 'ndenv', 'Installs and configures ndenv and node-build.'
+recipe 'ndenv::install', 'Install specified versions of node.js.'
+
+%w(apt build-essential git).each do |cb|
+  depends cb
+end
+
+%w(ubuntu debian).each do |os|
+  supports os
+end

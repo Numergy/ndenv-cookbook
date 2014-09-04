@@ -1,4 +1,4 @@
-ndenv Cookbook [![Build Status](https://travis-ci.org/Numergy/ndenv-cookbook.svg)](https://travis-ci.org/Numergy/ndenv-cookbook)
+ndenv Cookbook [![Build Status](https://travis-ci.org/Numergy/ndenv-cookbook.svg)](https://travis-ci.org/Numergy/ndenv-cookbook) [![Cookbook Version](https://img.shields.io/cookbook/v/ndenv.svg)](https://community.opscode.com/cookbooks/ndenv)
 ==============
 This cookbook installs and configures [ndenv](https://github.com/riywo/ndenv).
 

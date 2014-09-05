@@ -159,6 +159,23 @@ node_version | the node version you wish to install                        | nam
 force        | install even if this version is already present (reinstall) | false
 global       | set this node.js version as the global version              | false
 
+#### ndenv_npm
+Install NPM package for specified Node.js version.
+
+##### Actions
+Action  | Description         | Default
+------- |-------------        |---------
+install | Install NPM package | Yes
+
+##### Attributes
+Attribute     | Description                                        | Default
+-------       |-------------                                       |---------
+package_name  | the package's name to install                      | name
+version       | the package's version to install                   | ""
+source        | the package's source to install (tarball, github..)| 
+node_version  | the node version you wish to use                   | 
+response_file | not used                                           | nil
+
 Examples
 --------
 ##### Installing Node.js 0.10.20
@@ -168,8 +185,35 @@ Examples
 ##### Forcefully install Node.js 0.10.20
 
     ndenv_node "Node.js 0.10.20" do
-      node_version "0.10.20"
+      node_version "v0.10.20"
       force true
+    end
+
+##### Install grunt package version 0.4.5 for Node.js v0.10.20
+
+    ndenv_npm "grunt" do
+      node_version "v0.10.20"
+      version "0.4.5"
+    end
+
+##### Install latest grunt-cli package for Node.js v0.10.20
+
+    ndenv_npm "grunt-cli" do
+      node_version "v0.10.20"
+    end
+
+##### Install require.js package from github
+
+    ndenv_npm "r.js from github" do
+      node_version "v0.10.20"
+      source "nathanfaucett/require.js"
+    end
+
+##### Install forever package from tarball
+
+    ndenv_npm "forever from tarball" do
+      node_version "v0.10.20"
+      source "https://github.com/indexzero/forever/tarball/v0.5.6"
     end
 
 Contributing

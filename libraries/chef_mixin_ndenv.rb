@@ -38,7 +38,7 @@ class Chef
           env: { 'NDENV_ROOT' => node['ndenv']['root_path'] },
           timeout: 3600 }
 
-        shell_out("#{node['ndenv']['root_path']}/bin/ndenv #{cmd}", Chef::Mixin::DeepMerge.deep_merge!(options, default_options))
+        shell_out!("#{node['ndenv']['root_path']}/bin/ndenv #{cmd}", Chef::Mixin::DeepMerge.deep_merge!(options, default_options))
       end
 
       def ndenv_installed?

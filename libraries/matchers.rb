@@ -19,9 +19,6 @@
 #
 
 if defined?(ChefSpec)
-  ChefSpec::Runner.define_runner_method :ndenv_node
-  ChefSpec::Runner.define_runner_method :ndenv_npm
-
   def install_ndenv_node(node_version)
     ChefSpec::Matchers::ResourceMatcher.new(:ndenv_node, :install, node_version)
   end

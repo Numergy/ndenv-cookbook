@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # Cookbook Name:: ndenv
-# Attributes:: install
+# Library:: matchers
 #
 # Copyright 2014, Numergy
 #
@@ -18,5 +18,15 @@
 # limitations under the License.
 #
 
-default['ndenv']['installs'] = ['0.10.26']
-default['ndenv']['global'] = '0.10.26'
+if defined?(ChefSpec)
+  ChefSpec::Runner.define_runner_method :ndenv_node
+  ChefSpec::Runner.define_runner_method :ndenv_npm
+
+  def install_ndenv_node(node_version)
+    ChefSpec::Matchers::ResourceMatcher.new(:ndenv_node, :install, node_version)
+  end
+
+  def install_ndenv_npm(package_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:ndenv_npm, :install, package_name)
+  end
+end

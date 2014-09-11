@@ -45,17 +45,22 @@ class Chef
           false
         end
 
+        def removing_package?
+          true
+        end
+
         def load_current_resource
           @current_resource = Chef::Resource::NdenvNpm.new(@new_resource.name)
         end
 
         def install_package(name, version)
-          npm_args = 'install '
+          Chef::Log.info("Install NPM package `#{name}` for node[#{@new_resource.node_version}]..")
+          npm_args = 'install -g '
 
           if @new_resource.source
             npm_args << @new_resource.source
           else
-            npm_args << "-g #{name}"
+            npm_args << name
             npm_args << "@#{version}" unless version.empty?
           end
 
@@ -64,11 +69,13 @@ class Chef
         end
 
         def upgrade_package(name, version)
+          Chef::Log.info("Upgrade NPM package `#{name}` for node[#{@new_resource.node_version}]..")
           npm_command("update -g #{name}", @new_resource.node_version)
           ndenv_command('rehash')
         end
 
         def remove_package(name, version)
+          Chef::Log.info("Remove NPM package `#{name}` for node[#{@new_resource.node_version}]..")
           npm_command("remove -g #{name}", @new_resource.node_version)
           ndenv_command('rehash')
         end

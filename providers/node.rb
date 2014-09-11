@@ -21,7 +21,7 @@
 include Chef::Mixin::Ndenv
 
 action :install do
-  node_version = format_version(new_resource.node_version)
+  node_version = format_node_version(new_resource.node_version)
   resource_descriptor = "ndenv_node[#{new_resource.name}] (version #{node_version})"
 
   if !new_resource.force && node_version_installed?(node_version)

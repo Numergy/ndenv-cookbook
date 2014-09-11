@@ -29,29 +29,24 @@ class Chef
 
         def initialize(new_resource, run_context = nil)
           super
+          if new_resource.node_version.nil?
+            fail Chef::Exceptions::Package, "No node version specified for #{new_resource.package_name} package."
+          end
+
           @ndenv_root = node['ndenv']['root_path']
+          @candidate_version = 'latest'
+        end
+
+        def whyrun_supported?
+          false
+        end
+
+        def define_resource_requirements
+          false
         end
 
         def load_current_resource
-          @current_resource = Chef::Resource::Package.new(@new_resource.name)
-        end
-
-        def npm_binary_path(version)
-          ndenv_command('which npm', env: { 'NDENV_VERSION' => version }).stdout.chomp
-        end
-
-        def npm_command(args)
-          node_version = format_version(@new_resource.node_version)
-          npm_bin_path = npm_binary_path(node_version)
-
-          shell_out!("#{npm_bin_path} #{args}",
-                     user: node['ndenv']['user'],
-                     group: node['ndenv']['group'],
-                     cwd: node['ndenv']['user_home'],
-                     env: {
-                       'NDENV_VERSION' => node_version,
-                       'NDENV_ROOT' => @ndenv_root,
-                       'HOME' => node['ndenv']['user_home'] })
+          @current_resource = Chef::Resource::NdenvNpm.new(@new_resource.name)
         end
 
         def install_package(name, version)
@@ -64,7 +59,12 @@ class Chef
             npm_args << "@#{version}" unless version.empty?
           end
 
-          npm_command(npm_args)
+          npm_command(npm_args, @new_resource.node_version)
+          ndenv_command('rehash')
+        end
+
+        def upgrade_package(name, version)
+          npm_command("update -g #{name}", @new_resource.node_version)
           ndenv_command('rehash')
         end
       end

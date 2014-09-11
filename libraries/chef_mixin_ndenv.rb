@@ -41,7 +41,25 @@ class Chef
         shell_out!("#{node['ndenv']['root_path']}/bin/ndenv #{cmd}", Chef::Mixin::DeepMerge.deep_merge!(options, default_options))
       end
 
-      def format_version(version)
+      def npm_command(args, node_version)
+        node_version = format_node_version(node_version)
+        npm_bin_path = npm_binary_path(node_version)
+
+        shell_out!("#{npm_bin_path} #{args}",
+                   user: node['ndenv']['user'],
+                   group: node['ndenv']['group'],
+                   cwd: node['ndenv']['user_home'],
+                   env: {
+                     'NDENV_VERSION' => node_version,
+                     'NDENV_ROOT' => @ndenv_root,
+                     'HOME' => node['ndenv']['user_home'] })
+      end
+
+      def npm_binary_path(version)
+        ndenv_command('which npm', env: { 'NDENV_VERSION' => version }).stdout.chomp
+      end
+
+      def format_node_version(version)
         version = "v#{version}" unless version.start_with?('v')
         version
       end
@@ -51,12 +69,12 @@ class Chef
       end
 
       def node_version_installed?(version)
-        shell_out("ls #{node['ndenv']['root_path']}/versions/#{format_version(version)}").exitstatus == 0
+        shell_out("ls #{node['ndenv']['root_path']}/versions/#{format_node_version(version)}").exitstatus == 0
       end
 
       def ndenv_global_version?(version)
         out = shell_out("cat #{node['ndenv']['root_path']}/version")
-        out.stdout.chomp == format_version(version)
+        out.stdout.chomp == format_node_version(version)
       end
     end
   end

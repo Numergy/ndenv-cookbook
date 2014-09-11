@@ -163,9 +163,10 @@ global       | set this node.js version as the global version              | fal
 Install NPM package for specified Node.js version.
 
 ##### Actions
-Action  | Description         | Default
-------- |-------------        |---------
-install | Install NPM package | Yes
+Action  | Description                              | Default
+------- |------------------------------------------|---------
+install | Install NPM package                      | Yes
+upgrade | Update NPM package to the latest version | No
 
 ##### Attributes
 Attribute     | Description                                        | Default
@@ -214,6 +215,13 @@ Examples
     ndenv_npm "forever from tarball" do
       node_version "v0.10.20"
       source "https://github.com/indexzero/forever/tarball/v0.5.6"
+    end
+
+##### Update grunt package to the latest version
+
+    ndenv_npm "grunt" do
+      action :upgrade
+      node_version "v0.10.20"
     end
 
 Contributing

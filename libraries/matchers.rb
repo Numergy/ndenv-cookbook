@@ -26,4 +26,8 @@ if defined?(ChefSpec)
   def install_ndenv_npm(package_name)
     ChefSpec::Matchers::ResourceMatcher.new(:ndenv_npm, :install, package_name)
   end
+
+  def upgrade_ndenv_npm(package_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:ndenv_npm, :upgrade, package_name)
+  end
 end

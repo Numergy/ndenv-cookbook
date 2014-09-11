@@ -18,12 +18,12 @@
 # limitations under the License.
 #
 
-actions :install
+actions :install, :upgrade
 
 attribute :package_name,  kind_of: String, name_attribute: true
 attribute :version,       kind_of: String, default: ''
 attribute :source,        kind_of: String
-attribute :node_version,  kind_of: String
+attribute :node_version,  kind_of: String, default: nil
 attribute :response_file, kind_of: String, default: nil
 
 def initialize(*args)

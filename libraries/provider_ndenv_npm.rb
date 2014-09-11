@@ -41,17 +41,17 @@ class Chef
         end
 
         def npm_command(args)
-          npm_bin_path = npm_binary_path(@new_resource.node_version)
+          node_version = format_version(@new_resource.node_version)
+          npm_bin_path = npm_binary_path(node_version)
 
           shell_out!("#{npm_bin_path} #{args}",
                      user: node['ndenv']['user'],
                      group: node['ndenv']['group'],
                      cwd: node['ndenv']['user_home'],
                      env: {
-                       'NDENV_VERSION' => @new_resource.node_version,
+                       'NDENV_VERSION' => node_version,
                        'NDENV_ROOT' => @ndenv_root,
-                       'HOME' => node['ndenv']['user_home']
-                     })
+                       'HOME' => node['ndenv']['user_home'] })
         end
 
         def install_package(name, version)

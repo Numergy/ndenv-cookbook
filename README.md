@@ -97,7 +97,7 @@ Attributes
 <td><tt>['ndenv']['installs']</tt></td>
 <td>Array</td>
 <td>List of node.js versions to install.</td>
-<td><tt>['v0.10.26']</tt></td>
+<td><tt>['0.10.26']</tt></td>
 </tr>
 <tr>
 <td><tt>['ndenv']['global']</tt></td>

@@ -41,17 +41,22 @@ class Chef
         shell_out!("#{node['ndenv']['root_path']}/bin/ndenv #{cmd}", Chef::Mixin::DeepMerge.deep_merge!(options, default_options))
       end
 
+      def format_version(version)
+        version = "v#{version}" unless version.start_with?('v')
+        version
+      end
+
       def ndenv_installed?
         shell_out("ls #{node['ndenv']['root_path']}/bin/ndenv").exitstatus == 0
       end
 
       def node_version_installed?(version)
-        shell_out("ls #{node['ndenv']['root_path']}/versions/#{version}").exitstatus == 0
+        shell_out("ls #{node['ndenv']['root_path']}/versions/#{format_version(version)}").exitstatus == 0
       end
 
       def ndenv_global_version?(version)
         out = shell_out("cat #{node['ndenv']['root_path']}/version")
-        out.stdout.chomp == version
+        out.stdout.chomp == format_version(version)
       end
     end
   end

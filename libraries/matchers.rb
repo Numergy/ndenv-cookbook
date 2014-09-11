@@ -30,4 +30,8 @@ if defined?(ChefSpec)
   def upgrade_ndenv_npm(package_name)
     ChefSpec::Matchers::ResourceMatcher.new(:ndenv_npm, :upgrade, package_name)
   end
+
+  def remove_ndenv_npm(package_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:ndenv_npm, :remove, package_name)
+  end
 end

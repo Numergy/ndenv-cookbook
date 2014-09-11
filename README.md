@@ -167,6 +167,7 @@ Action  | Description                              | Default
 ------- |------------------------------------------|---------
 install | Install NPM package                      | Yes
 upgrade | Update NPM package to the latest version | No
+remove  | Remove NPM package                       | No
 
 ##### Attributes
 Attribute     | Description                                        | Default
@@ -221,6 +222,13 @@ Examples
 
     ndenv_npm "grunt" do
       action :upgrade
+      node_version "v0.10.20"
+    end
+
+##### Remove grunt package 
+
+    ndenv_npm "grunt" do
+      action :remove
       node_version "v0.10.20"
     end
 

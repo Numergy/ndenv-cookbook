@@ -67,6 +67,11 @@ class Chef
           npm_command("update -g #{name}", @new_resource.node_version)
           ndenv_command('rehash')
         end
+
+        def remove_package(name, version)
+          npm_command("remove -g #{name}", @new_resource.node_version)
+          ndenv_command('rehash')
+        end
       end
     end
   end

@@ -68,13 +68,13 @@ class Chef
           ndenv_command('rehash')
         end
 
-        def upgrade_package(name, version)
+        def upgrade_package(name, _version)
           Chef::Log.info("Upgrade NPM package `#{name}` for node[#{@new_resource.node_version}]..")
           npm_command("update -g #{name}", @new_resource.node_version)
           ndenv_command('rehash')
         end
 
-        def remove_package(name, version)
+        def remove_package(name, _version)
           Chef::Log.info("Remove NPM package `#{name}` for node[#{@new_resource.node_version}]..")
           npm_command("remove -g #{name}", @new_resource.node_version)
           ndenv_command('rehash')

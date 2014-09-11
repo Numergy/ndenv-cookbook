@@ -4,6 +4,10 @@ driver_config:
   require_chef_omnibus: true
 
 platforms:
+  - name: debian-7.2
+    driver_config:
+      box: opscode_debian-7.2.0_chef-provisionerless
+      box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.2.0_chef-provisionerless.box
   - name: ubuntu-12.04
     driver_config:
       box: opscode-ubuntu-12.04

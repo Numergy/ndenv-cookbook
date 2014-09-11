@@ -12,6 +12,7 @@ Requirements
 #### platforms
 The following platforms and versions are tested and supported using Opscode's test-kitchen.
 - `Ubuntu 12.04`
+- `Debian 7.2`
 
 Attributes
 ----------

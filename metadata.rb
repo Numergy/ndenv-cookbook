@@ -4,7 +4,7 @@ maintainer_email 'antoine.rouyer@numergy.com'
 license 'Apache 2.0'
 description 'Installs/Configures ndenv'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '0.1.0'
+version '0.2.0'
 
 recipe 'ndenv', 'Installs and configures ndenv and node-build.'
 recipe 'ndenv::install', 'Install specified versions of node.js.'

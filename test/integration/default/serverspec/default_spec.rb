@@ -89,3 +89,9 @@ describe file '/opt/ndenv/versions/v0.10.20/bin/bower' do
   it { should be_owned_by 'ndenv' }
   it { should be_grouped_into 'ndenv' }
 end
+
+describe file '/opt/ndenv/versions/v0.10.26/lib/node_modules/grunt' do
+  it { should be_directory }
+  it { should be_owned_by 'ndenv' }
+  it { should be_grouped_into 'ndenv' }
+end

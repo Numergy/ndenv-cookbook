@@ -1,4 +1,4 @@
-name 'fake'
+name 'fake-ndenv'
 maintainer 'Numergy'
 maintainer 'pierre.rambaud@numergy.com'
 license 'Apache 2.0'

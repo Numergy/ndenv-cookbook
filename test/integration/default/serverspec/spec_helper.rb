@@ -17,6 +17,7 @@ RSpec.configure do |c|
   c.before :all do
     c.os = backend(Serverspec::Commands::Base).check_os
   end
-  c.path = '/sbin:/usr/sbin:/usr/bin:/bin'
+  c.path = '/sbin:/usr/sbin:/usr/bin:/bin:/opt/ndenv/shims/:' \
+    '/opt/ndenv/versions/v0.10.26/bin:/opt/ndenv/versions/v0.10.20/bin'
   c.add_formatter 'RspecJunitFormatter', '/tmp/kitchen.xml'
 end

@@ -174,9 +174,9 @@ remove  | Remove NPM package                       | No
 Attribute     | Description                                        | Default
 -------       |-------------                                       |---------
 package_name  | the package's name to install                      | name
-version       | the package's version to install                   | ""
-source        | the package's source to install (tarball, github..)| 
-node_version  | the node version you wish to use                   | 
+version       | the package's version to install                   | nil
+source        | the package's source to install (tarball, github..)| nil
+node_version  | the node version you wish to use                   | nil
 response_file | not used                                           | nil
 
 Examples

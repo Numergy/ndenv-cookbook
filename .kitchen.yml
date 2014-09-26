@@ -18,6 +18,7 @@ suites:
     run_list:
       - recipe[ndenv]
       - recipe[ndenv::install]
+      - recipe[fake-ndenv]
     attributes:
       ndenv:
         group_users: [ vagrant ]

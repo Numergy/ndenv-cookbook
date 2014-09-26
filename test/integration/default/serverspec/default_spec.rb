@@ -84,6 +84,10 @@ describe file '/opt/ndenv/versions/v0.10.26/bin/bower' do
   it { should be_grouped_into 'ndenv' }
 end
 
+describe command '/opt/ndenv/versions/v0.10.26/bin/bower --version' do
+  it { should return_stdout '1.3.10' }
+end
+
 describe file '/opt/ndenv/versions/v0.10.20/bin/bower' do
   it { should be_file }
   it { should be_owned_by 'ndenv' }

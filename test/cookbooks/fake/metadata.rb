@@ -1,0 +1,7 @@
+name 'fake'
+maintainer 'Numergy'
+maintainer 'pierre.rambaud@numergy.com'
+license 'Apache 2.0'
+description 'Tests ndenv resources'
+version '0.0.0'
+depends 'ndenv'

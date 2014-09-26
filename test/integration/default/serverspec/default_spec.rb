@@ -77,3 +77,15 @@ describe file '/opt/ndenv/version' do
   it { should be_grouped_into 'ndenv' }
   it { should be_mode 644 }
 end
+
+describe file '/opt/ndenv/versions/v0.10.26/bin/bower' do
+  it { should be_file }
+  it { should be_owned_by 'ndenv' }
+  it { should be_grouped_into 'ndenv' }
+end
+
+describe file '/opt/ndenv/versions/v0.10.20/bin/bower' do
+  it { should be_file }
+  it { should be_owned_by 'ndenv' }
+  it { should be_grouped_into 'ndenv' }
+end

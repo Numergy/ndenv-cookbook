@@ -3,6 +3,10 @@ ndenv CHANGELOG
 
 This file is used to list changes made in each version of the ndenv cookbook.
 
+0.2.1
+-----
+- Fix for ndenv_npm resource
+
 0.2.0
 -----
 - Code quality improvements (chefspec / test-kitchen

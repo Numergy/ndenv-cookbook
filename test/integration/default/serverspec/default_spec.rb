@@ -88,7 +88,7 @@ describe file '/opt/ndenv/versions/v0.10.26/bin/bower' do
 end
 
 describe command '/opt/ndenv/versions/v0.10.26/bin/bower --version' do
-  its(:stdout) { should match /1.3.10/ }
+  its(:stdout) { should match(/1.3.10/) }
 end
 
 describe file '/opt/ndenv/versions/v0.10.20/bin/bower' do

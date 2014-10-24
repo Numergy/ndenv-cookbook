@@ -1,11 +1,5 @@
-.project
-.bundle/
-.vagrant
-.coverage/
-*.swp
 Berksfile.lock
 Gemfile.lock
-Vagrantfile
-vendor
-.kitchen/
+.kitchen
 .kitchen.local.yml
+.kitchen.key

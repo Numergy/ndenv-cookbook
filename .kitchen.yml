@@ -16,12 +16,13 @@ platforms:
 suites:
   - name: 'default'
     run_list:
+      - recipe[fake-ndenv::user]
       - recipe[ndenv]
       - recipe[ndenv::install]
       - recipe[fake-ndenv]
     attributes:
       ndenv:
-        group_users: [ vagrant ]
+        group_users: [ test-user ]
         installs:
           - 0.10.20
           - 0.10.26

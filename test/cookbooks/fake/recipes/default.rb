@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 ndenv_npm 'v0.10.20-bower' do
   package_name 'bower'
   node_version 'v0.10.20'

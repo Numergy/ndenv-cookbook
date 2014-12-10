@@ -6,6 +6,8 @@ matrix:
   exclude:
   - rvm: 2.1.0
     env: KITCHEN_YAML=.kitchen.cloud.yml
+  - rvm: 2.0.0
+    env: KITCHEN_YAML=
 before_install:
 - openssl aes-256-cbc -K $encrypted_35797516a4f3_key -iv $encrypted_35797516a4f3_iv -in .kitchen.key.enc -out .kitchen.key -d
 script:

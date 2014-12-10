@@ -10,7 +10,7 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_35797516a4f3_key -iv $encrypted_35797516a4f3_iv -in .kitchen.key.enc -out .kitchen.key -d
 script:
 - bundle exec rake
-- [ -n $KITCHEN_YAML ] && bundle exec kitchen test --destroy=always
+- "[ -z $KITCHEN_YAML ] || bundle exec kitchen test --destroy=always"
 env:
   matrix:
   - KITCHEN_YAML=.kitchen.cloud.yml

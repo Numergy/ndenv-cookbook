@@ -4,7 +4,7 @@ require_relative 'spec_helper'
 
 describe 'ndenv::default' do
   describe 'with default configuration' do
-    subject { ChefSpec::Runner.new.converge(described_recipe) }
+    subject { ChefSpec::ServerRunner.new.converge(described_recipe) }
 
     it 'does includes recipes' do
       expect(subject).to include_recipe('apt')
@@ -82,7 +82,7 @@ describe 'ndenv::default' do
 
   describe 'with override parameters' do
     let(:subject) do
-      ChefSpec::Runner.new do |node|
+      ChefSpec::ServerRunner.new do |node|
         node.set['ndenv']['user'] = 'adm-ndenv'
         node.set['ndenv']['group'] = 'adm-ndenv'
         node.set['ndenv']['group_users'] = ['vagrant']

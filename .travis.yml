@@ -1,12 +1,11 @@
 language: ruby
 rvm:
-- 2.0.0
+  - 2.0.0
+  - 2.1.0
 before_install:
 - openssl aes-256-cbc -K $encrypted_35797516a4f3_key -iv $encrypted_35797516a4f3_iv -in .kitchen.key.enc -out .kitchen.key -d
-before_script:
-- bundle exec berks install
 script:
-- bundle exec strainer test --except kitchen
+- bundle exec rake
 - KITCHEN_YAML=.kitchen.cloud.yml bundle exec kitchen test --destroy=always
 env:
   global:

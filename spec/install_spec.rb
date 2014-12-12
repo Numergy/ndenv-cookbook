@@ -4,7 +4,6 @@ require_relative 'spec_helper'
 
 describe 'ndenv::install' do
   describe 'install with default attributes' do
-
     let(:chef_run) { ChefSpec::ServerRunner.new.converge described_recipe }
 
     it 'does install node version 0.10.26' do
@@ -28,5 +27,4 @@ describe 'ndenv::install' do
       expect(chef_run).to install_ndenv_node('0.10.26').with(global: true)
     end
   end
-
 end

@@ -2,12 +2,21 @@ language: ruby
 rvm:
   - 2.0.0
   - 2.1.0
+matrix:
+  exclude:
+  - rvm: 2.1.0
+    env: KITCHEN_YAML=.kitchen.cloud.yml
+  - rvm: 2.0.0
+    env: KITCHEN_YAML=
 before_install:
 - openssl aes-256-cbc -K $encrypted_35797516a4f3_key -iv $encrypted_35797516a4f3_iv -in .kitchen.key.enc -out .kitchen.key -d
 script:
 - bundle exec rake
-- KITCHEN_YAML=.kitchen.cloud.yml bundle exec kitchen test --destroy=always
+- "[ -z $KITCHEN_YAML ] || bundle exec kitchen test --destroy=always"
 env:
+  matrix:
+  - KITCHEN_YAML=.kitchen.cloud.yml
+  - KITCHEN_YAML=
   global:
   - secure: iVjF0ZI7+8ZxZHsE2pbUk96L9Tc5MRIf5lt0kOMLFWxmExfdn71fR0JYA34zMBeMyJ4E9ADrHhQyVmG5Vm3z77CFBS/2i44ZOcPmPmeM3eluz9mJiIHI1nPWSlEFPTNf8vlnkSUCeXsfcIs7+pzNQrwa2wTl8Vit2vObNGgeDj0=
   - secure: P2QI4CWqJOXlMjlqjk/Hwb2n7eSeghWF0aakgflYNpciJu+eHWr7FknNAC09Mcyws7tE5gk91k7HQ2VJUb97Kt4JDs73OATyFOxzt+wmC3IE4ThKjyFJk+zU/BsBGzTfVlvGVdU997PDp3iKH5fI6U6zP87Q0O+ORgNt2ugxwrg=

@@ -3,6 +3,11 @@ ndenv CHANGELOG
 
 This file is used to list changes made in each version of the ndenv cookbook.
 
+0.3.0
+-----
+- Update dependencies
+- This cookbook now uses Rake instead Strainer for testing
+
 0.2.1
 -----
 - Fix for ndenv_npm resource

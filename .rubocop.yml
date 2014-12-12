@@ -25,5 +25,8 @@ NumericLiterals:
 LineLength:
   Enabled: false
 
+Metrics/AbcSize:
+  Enabled: false
+
 WordArray:
   MinSize: 3

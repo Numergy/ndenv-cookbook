@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 source 'https://rubygems.org'
 
-gem 'chef'
+gem 'chef', '~>12'
 gem 'berkshelf'
 
 group :integration do

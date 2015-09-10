@@ -26,7 +26,7 @@ class Chef
     module Ndenv
       include Chef::Mixin::ShellOut
 
-      def ndenv_command(cmd, options = {})
+      def build_ndenv_command(cmd, options)
         unless ndenv_installed?
           fail 'ndenv is not installed, can\'t run ndenv_command.'
         end
@@ -36,27 +36,51 @@ class Chef
           group: node['ndenv']['group'],
           cwd: node['ndenv']['user_home'],
           env: { 'NDENV_ROOT' => node['ndenv']['root_path'] },
-          timeout: 3600 }
-
-        shell_out!("#{node['ndenv']['root_path']}/bin/ndenv #{cmd}", Chef::Mixin::DeepMerge.deep_merge!(options, default_options))
+          timeout: 3600
+        }
+        [ "#{node['ndenv']['root_path']}/bin/ndenv #{cmd}", Chef::Mixin::DeepMerge.deep_merge!(options, default_options) ]
       end
 
-      def npm_command(args, node_version)
+      def build_npm_command(args, node_version)
         node_version = format_node_version(node_version)
         npm_bin_path = npm_binary_path(node_version)
 
-        shell_out!("#{npm_bin_path} #{args}",
-                   user: node['ndenv']['user'],
-                   group: node['ndenv']['group'],
-                   cwd: node['ndenv']['user_home'],
-                   env: {
-                     'NDENV_VERSION' => node_version,
-                     'NDENV_ROOT' => @ndenv_root,
-                     'HOME' => node['ndenv']['user_home'] })
+        command = "#{npm_bin_path} #{args}"
+        opts = {
+          user: node['ndenv']['user'],
+          group: node['ndenv']['group'],
+          cwd: node['ndenv']['user_home'],
+          env: {
+           'NDENV_VERSION' => node_version,
+           'NDENV_ROOT' => @ndenv_root,
+           'HOME' => node['ndenv']['user_home']
+          }
+        }
+        [command, opts]
+      end
+
+      def ndenv_command(cmd, options = {})
+        command, opts = build_ndenv_command(cmd, options)
+        shell_out(command, opts)
+      end
+
+      def ndenv_command!(cmd, options = {})
+        command, opts = build_ndenv_command(cmd, options)
+        shell_out!(command, opts)
+      end
+
+      def npm_command!(args, node_version)
+        command, opts = build_npm_command(args, node_version)
+        shell_out!(command, opts)
+      end
+
+      def npm_command(args, node_version)
+        command, opts = build_npm_command(args, node_version)
+        shell_out(command, opts)
       end
 
       def npm_binary_path(version)
-        ndenv_command('which npm', env: { 'NDENV_VERSION' => version }).stdout.chomp
+        ndenv_command!('which npm', env: { 'NDENV_VERSION' => version }).stdout.chomp
       end
 
       def format_node_version(version)

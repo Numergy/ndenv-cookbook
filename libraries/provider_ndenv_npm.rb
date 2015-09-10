@@ -38,11 +38,7 @@ class Chef
         end
 
         def whyrun_supported?
-          false
-        end
-
-        def define_resource_requirements
-          false
+          true
         end
 
         def removing_package?
@@ -63,21 +59,39 @@ class Chef
             npm_args << name
             npm_args << "@#{version}" unless version.empty?
           end
+          out = npm_command("-v #{name}")
 
-          npm_command(npm_args, @new_resource.node_version)
-          ndenv_command('rehash')
+          if out.exitstatus == 0
+            present_version = out.stdout.strip
+            unless version.empty? and version != present_version
+              converge_by "npm package #{name} is not present but having different version. installing it version #{version}" do
+                npm_command!(npm_args, @new_resource.node_version)
+                ndenv_command!('rehash')
+              end
+            end
+          else
+            converge_by "npm package #{name} is not present, installing it" do
+              npm_command!(npm_args, @new_resource.node_version)
+              ndenv_command!('rehash')
+            end
+          end
         end
 
         def upgrade_package(name, _version)
-          Chef::Log.info("Upgrade NPM package `#{name}` for node[#{@new_resource.node_version}]..")
-          npm_command("update -g #{name}", @new_resource.node_version)
-          ndenv_command('rehash')
+          converge_by("Upgrade NPM package `#{name}` for node[#{@new_resource.node_version}]..") do
+            npm_command!("update -g #{name}", @new_resource.node_version)
+            ndenv_command!('rehash')
+          end
         end
 
         def remove_package(name, _version)
-          Chef::Log.info("Remove NPM package `#{name}` for node[#{@new_resource.node_version}]..")
-          npm_command("remove -g #{name}", @new_resource.node_version)
-          ndenv_command('rehash')
+          out = npm_command("-v #{name}")
+          unless out.exitstatus == 0
+            converge_by("Remove NPM package `#{name}` for node[#{@new_resource.node_version}]..") do
+              npm_command!("remove -g #{name}", @new_resource.node_version)
+              ndenv_command!('rehash')
+            end
+          end
         end
       end
     end

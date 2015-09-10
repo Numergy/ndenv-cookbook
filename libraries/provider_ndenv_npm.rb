@@ -59,7 +59,7 @@ class Chef
             npm_args << name
             npm_args << "@#{version}" unless version.empty?
           end
-          out = npm_command("-v #{name}")
+          out = npm_command("-v #{name}",  @new_resource.node_version)
 
           if out.exitstatus == 0
             present_version = out.stdout.strip
@@ -85,7 +85,7 @@ class Chef
         end
 
         def remove_package(name, _version)
-          out = npm_command("-v #{name}")
+          out = npm_command("-v #{name}",  @new_resource.node_version)
           unless out.exitstatus == 0
             converge_by("Remove NPM package `#{name}` for node[#{@new_resource.node_version}]..") do
               npm_command!("remove -g #{name}", @new_resource.node_version)

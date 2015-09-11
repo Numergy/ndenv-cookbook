@@ -21,12 +21,11 @@ Encoding:
 
 NumericLiterals:
   Enabled: false
-
+MethodLength:
+  Enabled: false
 LineLength:
   Enabled: false
-
 Metrics/AbcSize:
   Enabled: false
-
 WordArray:
   MinSize: 3

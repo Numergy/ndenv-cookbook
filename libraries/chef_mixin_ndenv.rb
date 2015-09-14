@@ -38,7 +38,7 @@ class Chef
           env: { 'NDENV_ROOT' => node['ndenv']['root_path'] },
           timeout: 3600
         }
-        ["#{node['ndenv']['root_path']}/bin/ndenv #{cmd}", Chef::Mixin::DeepMerge.deep_merge!(options, default_options)]
+        [ "#{node['ndenv']['root_path']}/bin/ndenv #{cmd}", Chef::Mixin::DeepMerge.deep_merge!(options, default_options) ]
       end
 
       def build_npm_command(args, node_version)
@@ -51,9 +51,9 @@ class Chef
           group: node['ndenv']['group'],
           cwd: node['ndenv']['user_home'],
           env: {
-            'NDENV_VERSION' => node_version,
-            'NDENV_ROOT' => @ndenv_root,
-            'HOME' => node['ndenv']['user_home']
+           'NDENV_VERSION' => node_version,
+           'NDENV_ROOT' => @ndenv_root,
+           'HOME' => node['ndenv']['user_home']
           }
         }
         [command, opts]

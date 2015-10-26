@@ -44,7 +44,7 @@ class Chef
         ["#{node['ndenv']['root_path']}/bin/ndenv #{cmd}", Chef::Mixin::DeepMerge.deep_merge!(options, default_options)]
       end
 
-      def npm_command_options
+      def npm_command_options(node_version)
         {
           user: node['ndenv']['user'],
           group: node['ndenv']['group'],
@@ -65,23 +65,23 @@ class Chef
       end
 
       def ndenv_command(cmd, options = {})
-        command = build_ndenv_command(cmd, options)
-        shell_out(command, npm_command_options)
+        command, opts = build_ndenv_command(cmd, options)
+        shell_out(command, opts)
       end
 
       def ndenv_command!(cmd, options = {})
-        command = build_ndenv_command(cmd, options)
-        shell_out!(command, npm_command_options)
+        command, opts = build_ndenv_command(cmd, options)
+        shell_out!(command, opts)
       end
 
       def npm_command!(args, node_version)
         command = build_npm_command(args, node_version)
-        shell_out!(command, npm_command_options)
+        shell_out!(command, npm_command_options(node_version))
       end
 
       def npm_command(args, node_version)
         command = build_npm_command(args, node_version)
-        shell_out(command, npm_command_options)
+        shell_out(command, npm_command_options(node_version))
       end
 
       def npm_binary_path(version)

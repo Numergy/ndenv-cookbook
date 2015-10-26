@@ -29,5 +29,4 @@ def initialize(*args)
   super
   @action = :install
   @resource_name = :ndenv_npm
-  @provider = Chef::Provider::Package::NdenvNpm
 end

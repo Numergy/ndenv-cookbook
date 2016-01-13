@@ -9,7 +9,6 @@ group :integration do
   gem 'rake'
   gem 'test-kitchen'
   gem 'kitchen-vagrant'
-  gem 'kitchen-openstack'
   gem 'chefspec'
   gem 'foodcritic'
 end

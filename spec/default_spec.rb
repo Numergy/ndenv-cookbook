@@ -68,7 +68,11 @@ describe 'ndenv::default' do
     end
 
     it 'should create profile directory' do
-      expect(subject).to_not create_directory('/etc/profile.d')
+      expect(subject).to create_directory('/etc/profile.d').with(
+        owner: 'root',
+        group: 'root',
+        mode: '0755',
+        recursive: true)
     end
 
     it 'should copy ndenv profile file' do
@@ -147,7 +151,11 @@ describe 'ndenv::default' do
     end
 
     it 'should create profile directory' do
-      expect(subject).to_not create_directory('/etc/profile.d')
+      expect(subject).to create_directory('/etc/profile.d').with(
+        owner: 'root',
+        group: 'root',
+        mode: '0755',
+        recursive: true)
     end
 
     it 'should copy ndenv profile file' do

@@ -45,7 +45,6 @@ directory node['ndenv']['root_path'] do
 end
 
 git node['ndenv']['root_path'] do
-  not_if { File.exist?("#{node['ndenv']['root_path']}/.git") }
   user node['ndenv']['user']
   group node['ndenv']['group']
   repository node['ndenv']['git_repository']
@@ -54,7 +53,6 @@ git node['ndenv']['root_path'] do
 end
 
 directory "#{node['ndenv']['root_path']}/plugins" do
-  not_if { File.exist?("#{node['ndenv']['root_path']}/plugins") }
   owner node['ndenv']['user']
   group node['ndenv']['group']
   mode '0755'
@@ -63,7 +61,6 @@ directory "#{node['ndenv']['root_path']}/plugins" do
 end
 
 git "#{node['ndenv']['root_path']}/plugins/node-build" do
-  not_if { File.exist?("#{node['ndenv']['root_path']}/plugins/node-build") }
   user node['ndenv']['user']
   group node['ndenv']['group']
   repository node['node_build']['git_repository']
@@ -72,7 +69,6 @@ git "#{node['ndenv']['root_path']}/plugins/node-build" do
 end
 
 directory node['ndenv']['profile_path'] do
-  not_if { File.exist?(node['ndenv']['profile_path']) }
   owner 'root'
   group 'root'
   mode '0755'

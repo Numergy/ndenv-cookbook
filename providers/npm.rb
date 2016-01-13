@@ -20,22 +20,23 @@ action :install do
   end
 
   out = npm_command("-g -j ls #{name}", @new_resource.node_version)
+  json_out = ::JSON.parse(out.stdout.strip)
 
-  if out.exitstatus == 0
+  if json_out.empty?
+    converge_by "npm package #{name} is not present, installing it" do
+      npm_command!(npm_args, @new_resource.node_version)
+      ndenv_command!('rehash')
+    end
+  else
     # check for version equality only if version is specified
     if version
-      present_version = ::JSON.parse(out.stdout.strip)['dependencies'][name]['version']
+      present_version = json_out['dependencies'][name]['version']
       if version != present_version
         converge_by "A different version (#{present_version}) of npm package is present. Will install version #{version}" do
           npm_command!(npm_args, @new_resource.node_version)
           ndenv_command!('rehash')
         end
       end
-    end
-  else
-    converge_by "npm package #{name} is not present, installing it" do
-      npm_command!(npm_args, @new_resource.node_version)
-      ndenv_command!('rehash')
     end
   end
 end

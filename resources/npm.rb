@@ -23,12 +23,10 @@ actions :install, :upgrade, :remove
 attribute :package_name,  kind_of: String, name_attribute: true
 attribute :version,       kind_of: String
 attribute :source,        kind_of: String
-attribute :node_version,  kind_of: String
-attribute :response_file, kind_of: String
+attribute :node_version,  kind_of: String, required: true
 
 def initialize(*args)
   super
   @action = :install
   @resource_name = :ndenv_npm
-  @provider = Chef::Provider::Package::NdenvNpm
 end

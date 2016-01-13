@@ -3,6 +3,10 @@ ndenv CHANGELOG
 
 This file is used to list changes made in each version of the ndenv cookbook.
 
+0.4.0
+-----
+- Npm provider idempotent
+
 0.3.0
 -----
 - Update dependencies

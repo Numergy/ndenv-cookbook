@@ -38,7 +38,7 @@ class Chef
 
       def build_ndenv_command(cmd, options)
         unless ndenv_installed?
-          fail 'ndenv is not installed, can\'t run ndenv_command.'
+          raise 'ndenv is not installed, can\'t run ndenv_command.'
         end
 
         ["#{node['ndenv']['root_path']}/bin/ndenv #{cmd}", Chef::Mixin::DeepMerge.deep_merge!(options, default_options)]

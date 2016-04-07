@@ -1,3 +1,24 @@
+# -*- coding: utf-8 -*-
+#
+# Cookbook Name:: ndenv
+# Provider:: npm
+#
+# Copyright 2014, Numergy
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+use_inline_resources
 
 include Chef::Mixin::Ndenv
 
@@ -27,15 +48,12 @@ action :install do
       npm_command!(npm_args, @new_resource.node_version)
       ndenv_command!('rehash')
     end
-  else
-    # check for version equality only if version is specified
-    if version
-      present_version = json_out['dependencies'][name]['version']
-      if version != present_version
-        converge_by "A different version (#{present_version}) of npm package is present. Will install version #{version}" do
-          npm_command!(npm_args, @new_resource.node_version)
-          ndenv_command!('rehash')
-        end
+  elsif version # check for version equality only if version is specified
+    present_version = json_out['dependencies'][name]['version']
+    if version != present_version
+      converge_by "A different version (#{present_version}) of npm package is present. Will install version #{version}" do
+        npm_command!(npm_args, @new_resource.node_version)
+        ndenv_command!('rehash')
       end
     end
   end

@@ -18,6 +18,8 @@
 # limitations under the License.
 #
 
+use_inline_resources
+
 include Chef::Mixin::Ndenv
 
 action :install do
@@ -32,7 +34,7 @@ action :install do
     out = ndenv_command "install #{node_version}"
 
     unless out.exitstatus == 0
-      fail Chef::Exceptions::ShellCommandFailed, "\n#{out.format_for_exception}"
+      raise Chef::Exceptions::ShellCommandFailed, "\n#{out.format_for_exception}"
     end
   end
 
@@ -41,7 +43,7 @@ action :install do
     out = ndenv_command "global #{node_version}"
 
     unless out.exitstatus == 0
-      fail Chef::Exceptions::ShellCommandFailed, "\n#{out.format_for_exception}"
+      raise Chef::Exceptions::ShellCommandFailed, "\n#{out.format_for_exception}"
     end
   end
 

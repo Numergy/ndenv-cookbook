@@ -16,3 +16,8 @@ end
 %w(ubuntu debian).each do |os|
   supports os
 end
+
+source_url 'https://github.com/Numergy/ndenv-cookbook' if
+  respond_to?(:source_url)
+issues_url 'https://github.com/Numergy/ndenv-cookbook/issues' if
+  respond_to?(:issues_url)

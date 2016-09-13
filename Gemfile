@@ -5,10 +5,10 @@ gem 'chef', '~>12'
 gem 'berkshelf'
 
 group :integration do
-  gem 'rubocop'
   gem 'rake'
   gem 'test-kitchen'
   gem 'kitchen-vagrant'
   gem 'chefspec'
   gem 'foodcritic'
+  gem 'cookstyle'
 end

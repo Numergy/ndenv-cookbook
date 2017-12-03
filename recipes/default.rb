@@ -33,7 +33,7 @@ end
 user node['ndenv']['user'] do
   shell '/bin/bash'
   group node['ndenv']['group']
-  supports manage_home: node['ndenv']['manage_home']
+  manage_home node['ndenv']['manage_home']
   home node['ndenv']['user_home']
 end
 

@@ -32,7 +32,7 @@ class Chef
           group: node['ndenv']['group'],
           cwd: node['ndenv']['user_home'],
           env: { 'NDENV_ROOT' => node['ndenv']['root_path'] },
-          timeout: 3600
+          timeout: 3600,
         }
       end
 
@@ -52,8 +52,8 @@ class Chef
           env: {
             'NDENV_VERSION' => node_version,
             'NDENV_ROOT' => @ndenv_root,
-            'HOME' => node['ndenv']['user_home']
-          }
+            'HOME' => node['ndenv']['user_home'],
+          },
         }
       end
 

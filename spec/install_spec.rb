@@ -14,8 +14,8 @@ describe 'ndenv::install' do
   describe 'install with overriden attributes' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new do |node|
-        node.set['ndenv']['installs'] = ['0.10.20', '0.10.26']
-        node.set['ndenv']['global'] = '0.10.26'
+        node.override['ndenv']['installs'] = ['0.10.20', '0.10.26']
+        node.override['ndenv']['global'] = '0.10.26'
       end.converge described_recipe
     end
 

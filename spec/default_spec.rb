@@ -26,7 +26,7 @@ describe 'ndenv::default' do
       expect(subject).to create_user('ndenv').with(
         shell: '/bin/bash',
         group: 'ndenv',
-        supports: { manage_home: true },
+        manage_home: true,
         home: '/home/ndenv'
       )
     end
@@ -87,15 +87,15 @@ describe 'ndenv::default' do
   describe 'with override parameters' do
     let(:subject) do
       ChefSpec::ServerRunner.new do |node|
-        node.set['ndenv']['user'] = 'adm-ndenv'
-        node.set['ndenv']['group'] = 'adm-ndenv'
-        node.set['ndenv']['group_users'] = ['vagrant']
-        node.set['ndenv']['manage_home'] = false
-        node.set['ndenv']['root_path'] = '/usr/local/ndenv'
-        node.set['ndenv']['git_repository'] = 'https://github.com/fake_account/fake_repo.git'
-        node.set['ndenv']['git_reference'] = 'dev'
-        node.set['node_build']['git_repository'] = 'https://github.com/fake_account/fake_repo.git'
-        node.set['node_build']['git_reference'] = 'dev'
+        node.override['ndenv']['user'] = 'adm-ndenv'
+        node.override['ndenv']['group'] = 'adm-ndenv'
+        node.override['ndenv']['group_users'] = ['vagrant']
+        node.override['ndenv']['manage_home'] = false
+        node.override['ndenv']['root_path'] = '/usr/local/ndenv'
+        node.override['ndenv']['git_repository'] = 'https://github.com/fake_account/fake_repo.git'
+        node.override['ndenv']['git_reference'] = 'dev'
+        node.override['node_build']['git_repository'] = 'https://github.com/fake_account/fake_repo.git'
+        node.override['node_build']['git_reference'] = 'dev'
       end.converge(described_recipe)
     end
 
@@ -109,7 +109,7 @@ describe 'ndenv::default' do
       expect(subject).to create_user('adm-ndenv').with(
         shell: '/bin/bash',
         group: 'adm-ndenv',
-        supports: { manage_home: false },
+        manage_home: false,
         home: '/home/adm-ndenv'
       )
     end

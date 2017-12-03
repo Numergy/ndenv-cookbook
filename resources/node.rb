@@ -19,14 +19,10 @@
 #
 
 actions :install
+default_action :install
+resource_name :ndenv_node
 
 attribute :name,         kind_of: String
-attribute :node_version, kind_of: String
+attribute :node_version, kind_of: String, name_attribute: true
 attribute :force,        default: false
 attribute :global,       default: false
-
-def initialize(*args)
-  super
-  @action = :install
-  @node_version ||= @name
-end

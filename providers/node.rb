@@ -46,6 +46,4 @@ action :install do
       raise Chef::Exceptions::ShellCommandFailed, "\n#{out.format_for_exception}"
     end
   end
-
-  new_resource.updated_by_last_action(true)
 end
